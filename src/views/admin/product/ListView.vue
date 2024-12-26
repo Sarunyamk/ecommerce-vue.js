@@ -1,27 +1,28 @@
 <script setup>
+import { ref, onMounted } from "vue";
+import { RouterLink } from "vue-router";
 import AdminLayout from "@/layouts/AdminLayout.vue";
-import { ref } from "vue";
 import Edit from "@/components/icons/Edit.vue";
 import Trash from "@/components/icons/Trash.vue";
 
-const products = ref([
-  {
-    name: "Product 1",
-    image: "https://picsum.photos/id/237/200/300",
-    price: 100000,
-    quantity: 10,
-    remainQuantity: 5,
-    status: "open",
-    updatedAt: new Date().toISOString(),
-  },
-]);
+import { useAdminProductStore } from "@/stores/admin/product.js";
+
+const adminProductStore = useAdminProductStore();
+
+onMounted(() => {
+  adminProductStore.loadProduct();
+});
 </script>
 <template>
   <AdminLayout>
     <div class="flex justify-between items-center my-4">
       <div class="text-3xl font-bold">Product</div>
       <div>
-        <button class="btn btn-neutral">Add New</button>
+        <RouterLink
+          :to="{ name: 'admin-products-create' }"
+          class="btn btn-neutral"
+          >Add New</RouterLink
+        >
       </div>
     </div>
 
@@ -40,7 +41,7 @@ const products = ref([
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in products">
+          <tr v-for="(item, index) in adminProductStore.lists">
             <th>{{ item.name }}</th>
             <td>
               <img :src="item.image" class="w-12 rounded-md" />
@@ -48,17 +49,28 @@ const products = ref([
             <td>{{ item.price }}</td>
             <td>{{ item.remainQuantity }} / {{ item.quantity }}</td>
             <td>
-              <div class="badge badge-success">
+              <div
+                class="badge p-2"
+                :class="
+                  item.status === 'open' ? 'badge-success' : 'badge-error'
+                "
+              >
                 {{ item.status }}
               </div>
             </td>
             <td>{{ item.updatedAt }}</td>
             <td>
               <div class="flex justify-center gap-1">
-                <button class="btn btn-ghost">
+                <RouterLink
+                  class="btn btn-ghost"
+                  :to="{ name: 'admin-products-update', params: { id: index } }"
+                >
                   <Edit class="h-5 w-5 text-gray-500 hover:text-gray-700" />
-                </button>
-                <button class="btn btn-ghost">
+                </RouterLink>
+                <button
+                  class="btn btn-ghost"
+                  @click="adminProductStore.removeProduct(index)"
+                >
                   <Trash class="h-5 w-5 text-red-500 hover:text-red-700" />
                 </button>
               </div>
