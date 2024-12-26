@@ -63,12 +63,12 @@ const router = createRouter({
     },
     {
       path: '/admin/products',
-      name: 'admin-product-list',
+      name: 'admin-products-list',
       component: AdminProductList
     },
     {
       path: '/admin/products/create',
-      name: 'admin-product-create',
+      name: 'admin-products-create',
       component: AdminProductUpdate
     },
     {
