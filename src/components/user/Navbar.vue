@@ -1,19 +1,25 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
-import { defineProps, ref } from "vue";
+import { defineProps, ref, onMounted } from "vue";
 import { useCartStore } from "@/stores/user/cart";
 
 const router = useRouter();
 const cartStore = useCartStore();
 
 const searchText = ref("");
+const profileImage = ref("");
 
 defineProps({
   isLogin: Boolean,
   login: Function,
   logout: Function,
 });
-
+onMounted(() => {
+  const storedImage = localStorage.getItem("profile-image");
+  if (storedImage) {
+    profileImage.value = storedImage;
+  }
+});
 const handleSearch = (e) => {
   console.log(e.key);
   if (e.key === "Enter") {
@@ -27,7 +33,7 @@ const handleSearch = (e) => {
 };
 </script>
 <template>
-  <div class="navbar bg-base-100">
+  <div class="navbar bg-base-100 shadow-lg">
     <div class="flex-1">
       <RouterLink :to="{ name: 'home' }" class="btn btn-ghost text-xl"
         >Ecommerce</RouterLink
@@ -94,10 +100,7 @@ const handleSearch = (e) => {
       <div v-else class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
+            <img alt="User Profile" :src="profileImage" />
           </div>
         </div>
         <ul

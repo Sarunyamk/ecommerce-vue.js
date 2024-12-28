@@ -1,10 +1,12 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 import Footer from "../components/user/Footer.vue";
 import Navbar from "../components/user/Navbar.vue";
 
 const isLogin = ref(false);
+const router = useRouter();
 
 const login = () => {
   isLogin.value = true;
@@ -15,7 +17,7 @@ const logout = () => {
   localStorage.removeItem("isLogin");
   localStorage.removeItem("cart-data");
   localStorage.removeItem("order-data");
-  window.location.reload();
+  router.push({ name: "home" });
 };
 
 onMounted(() => {

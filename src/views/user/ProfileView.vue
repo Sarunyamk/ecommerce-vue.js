@@ -1,7 +1,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import UserLayout from "@/layouts/UserLayout.vue";
 
+const router = useRouter();
 const profileImage = ref("https://via.placeholder.com/150");
 const email = ref("");
 const name = ref("");
@@ -12,6 +14,7 @@ const handleFileUpload = (e) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       profileImage.value = e.target.result;
+      localStorage.setItem("profile-image", e.target.result);
     };
     reader.readAsDataURL(file);
   }
@@ -25,6 +28,7 @@ const updateProfile = () => {
   };
   localStorage.setItem("profile-data", JSON.stringify(profileData));
   alert("Profile updated successfully");
+  router.push({ name: "home" });
 };
 
 onMounted(() => {

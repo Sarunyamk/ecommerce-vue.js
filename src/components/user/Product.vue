@@ -16,7 +16,7 @@ defineProps({
         <img :src="item.imageUrl" />
       </figure>
       <div class="card-body">
-        <h2 class="card-title">{{ item.name }}</h2>
+        <h2 class="card-title capitalize">{{ item.name }}</h2>
         <p>{{ item.about }}</p>
         <div class="card-actions justify-end">
           <button class="btn btn-primary" @click="addToCart(item)">

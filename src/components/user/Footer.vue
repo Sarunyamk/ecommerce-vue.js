@@ -1,6 +1,8 @@
 <script setup></script>
 <template>
-  <footer class="footer bg-neutral text-neutral-content p-10">
+  <footer
+    class="footer bg-neutral text-neutral-content p-10 flex justify-around"
+  >
     <nav>
       <h6 class="footer-title">Services</h6>
       <a class="link link-hover">Branding</a>

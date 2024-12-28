@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.hero {
+  background-image: url("https://images.unsplash.com/photo-1534206303345-04c4c6d95cce?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjE2fHxzaG9lfGVufDB8fDB8fHww");
+  color: aliceblue;
+}

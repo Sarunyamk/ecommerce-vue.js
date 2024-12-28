@@ -14,7 +14,7 @@ const changQuantity = (e, index) => {
 
 <template>
   <UserLayout>
-    <h1 class="text-3xl font-bold">Shopping Cart</h1>
+    <h1 class="text-3xl font-bold m-8">Shopping Cart</h1>
     <div class="flex my-4">
       <div class="flex-auto w-64 bg-base-200 p-4">
         <div
@@ -26,29 +26,30 @@ const changQuantity = (e, index) => {
         <div
           v-else
           v-for="(item, index) in cartStore.items"
-          class="flex relative"
+          class="flex relative my-4"
         >
           <div class="flex-1">
             <img class="w-full p-4" :src="item.imageUrl" />
           </div>
+
           <div class="flex-1">
-            <div class="flex flex-col justify-between h-full">
+            <div class="flex flex-col justify-between h-full py-4">
               <div>
                 <div class="grid grid-cols-2">
                   <div>
                     <div>
-                      <b>{{ item.name }}</b>
+                      <b class="capitalize">{{ item.name }}</b>
                     </div>
                     <div>{{ item.about }}</div>
                     <div>{{ item.price }} B.</div>
                   </div>
                   <div>
                     <select
-                      class="select w-2/3"
+                      class="select w-2/3 text-center"
                       @change="changQuantity($event, index)"
                       v-model="item.quantity"
                     >
-                      <option v-for="quantity in [1, 2, 3, 4, 5]">
+                      <option v-for="quantity in [1, 2, 3, 4, 5, 6]">
                         {{ quantity }}
                       </option>
                     </select>

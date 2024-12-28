@@ -41,12 +41,13 @@ const userFormData = reactive({
 const payment = () => {
   cartStore.placeOrder(userFormData);
   router.push({ name: "success" });
+  cartStore.items = [];
 };
 </script>
 
 <template>
   <UserLayout>
-    <h1 class="text-3xl font-bold">Checkout Cart</h1>
+    <h1 class="text-3xl font-bold m-8">Checkout Cart</h1>
     <div class="flex my-4">
       <div class="flex-auto w-1/2 bg-base-200 p-4">
         <div v-for="form in formInputs" class="flex flex-col my-3">
