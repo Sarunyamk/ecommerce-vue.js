@@ -11,4 +11,7 @@ export default {
   daisyui: {
     themes: ["cupcake"],
   },
+  types: [
+    "vue-sweetalert2"
+  ],
 }

@@ -2,8 +2,11 @@
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import UserLayout from "@/layouts/UserLayout.vue";
+import { useToast } from "vue-toastification";
 
+const toast = useToast();
 const router = useRouter();
+
 const profileImage = ref("https://via.placeholder.com/150");
 const email = ref("");
 const name = ref("");
@@ -27,7 +30,7 @@ const updateProfile = () => {
     email: email.value,
   };
   localStorage.setItem("profile-data", JSON.stringify(profileData));
-  alert("Profile updated successfully");
+  toast.success("Profile updated successfully!", { position: "top-center" });
   router.push({ name: "home" });
 };
 
